@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Asem Abdelsalam</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="Home">Asem Abdelsalam</a>
+            <nav class="nav-menu" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="search-toggle" aria-label="Toggle search">
+                        <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </li>
+                </ul>
+                <button class="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="search-bar" class="search-bar" role="search">
+        <div class="container">
+            <input type="search" placeholder="Search projects..." id="search-input" aria-label="Search projects">
+            <button class="close-search" aria-label="Close search">
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <section id="about" class="section about-section">
+            <div class="container">
+                <h2>About</h2>
+                <div class="about-content">
+                    <img src="images/profilepicture.jpg" alt="Asem Abdelsalam" class="profile-img" loading="lazy">
+                    <div class="about-text">
+                        <h3>Asem Abdelsalam</h3>
+                        <p class="about-subtitle">Architect | Computational Designer</p>
+                        <p>Expert Rhino 3D and Grasshopper Designer with 4 years of experience in Design automation and digital fabrication. I bring a versatile skill set to your projects. As a computational designer with experience in parametric design, I excel in creating complex 3D models and seamless architectural designs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section experience-section">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="experience-content">
+                    <ul class="experience-list">
+                        <li>
+                            <h3>Computational Designer | Encode Studio</h3>
+                            <p class="experience-date">2021 - Present</p>
+                            <p>Led parametric design projects, optimizing workflows with Grasshopper and Rhino 3D for architectural solutions.</p>
+                        </li>
+                        <li>
+                            <h3>Freelance Architect</h3>
+                            <p class="experience-date">2019 - 2021</p>
+                            <p>Developed bespoke 3D models and design automation scripts for clients in architecture and fabrication.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills-section">
+            <div class="container">
+                <h2>Skills</h2>
+                <ul class="skills-grid" role="list">
+                    <li>Rhino 3D</li>
+                    <li>Grasshopper</li>
+                    <li>Revit (BIM)</li>
+                    <li>Python</li>
+                    <li>BIM Processes</li>
+                    <li>Adobe Suite</li>
+                    <li>AutoCAD</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education" class="section education-section">
+            <div class="container">
+                <h2>Education</h2>
+                <div class="education-content">
+                    <ul class="education-list">
+                        <li>
+                            <h3>Bachelor of Architecture</h3>
+                            <p class="education-date">University Name | 2015 - 2019</p>
+                            <p>Focused on computational design and sustainable architecture.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="languages" class="section languages-section">
+            <div class="container">
+                <h2>Languages</h2>
+                <ul class="languages-grid" role="list">
+                    <li>English - Fluent</li>
+                    <li>Arabic - Native</li>
+                    <li>French - Intermediate</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Asem Abdelsalam</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>

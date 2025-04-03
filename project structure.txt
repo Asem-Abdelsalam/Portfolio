@@ -1,0 +1,24 @@
+asem-portfolio/
+├── index.html
+├── about.html         (New file)
+├── contact.html
+├── css/
+│   ├── style.css
+│   ├── base.css
+│   ├── layout.css
+│   ├── sections.css
+│   └── responsive.css
+├── js/
+│   ├── script.js
+│   ├── navigation.js
+│   ├── interactivity.js
+├── images/
+│   ├── logo.png          (Favicon logo)
+│   ├── parametric-bg.mp4 (Architectural video 1)
+│   ├── video2.mp4       (Architectural video 2)
+│   ├── video3.mp4       (Architectural video 3)
+│   ├── profilepicture.jpg
+│   ├── academic-projects.jpg
+│   ├── EncodeStudio.jpeg
+│   ├── Acoufelt.png
+│   ├── freelancing.jpg

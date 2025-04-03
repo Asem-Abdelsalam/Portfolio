@@ -3,62 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Asem Abdelsalam</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Computational Design | Grasshopper | Rhino | Architecture</p>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo" aria-label="Home">Asem Abdelsalam</a>
+            <nav class="nav-menu" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="search-toggle" aria-label="Toggle search">
+                        <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </li>
+                </ul>
+                <button class="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hi! I'm Asem Abdelsalam, an architect and computational designer. I specialize in parametric design, 3D modeling, and digital fabrication. I’m passionate about leveraging technology in architecture to create innovative solutions.</p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project 1: Grasshopper Script for Parametric Design</h3>
-            <p>This project involved creating a parametric model using Grasshopper and Rhino. The goal was to design a complex facade system that adjusts based on various parameters.</p>
-            <a href="#">View Project</a>
+    <div id="search-bar" class="search-bar" role="search">
+        <div class="container">
+            <input type="search" placeholder="Search projects..." id="search-input" aria-label="Search projects">
+            <button class="close-search" aria-label="Close search">
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
         </div>
-        <div class="project">
-            <h3>Project 2: 3D Model from Point Cloud</h3>
-            <p>In this project, I used Rhino to convert a point cloud into a detailed 3D model, capturing the exact measurements and details of an existing building.</p>
-            <a href="#">View Project</a>
+    </div>
+
+    <section id="hero" class="hero">
+        <div class="video-container">
+            <video class="hero-video active" autoplay muted loop playsinline data-index="0">
+                <source src="images/parametric-bg.mp4" type="video/mp4">
+            </video>
+            <video class="hero-video" muted loop playsinline data-index="1">
+                <source src="images/video2.mp4" type="video/mp4">
+            </video>
+            <video class="hero-video" muted loop playsinline data-index="2">
+                <source src="images/video3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-title" id="video-title">Parametric Design Study</div>
+        <div class="video-controls">
+            <button class="video-nav prev" aria-label="Previous video">←</button>
+            <div class="video-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+            <button class="video-nav next" aria-label="Next video">→</button>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>Skills & Tools</h2>
-        <ul>
-            <li>Rhino 3D</li>
-            <li>Grasshopper</li>
-            <li>Revit</li>
-            <li>Python</li>
-            <li>BIM</li>
-            <li>Adobe Photoshop</li>
-            <li>CAD</li>
-        </ul>
-    </section>
+    <main>
+        <section id="projects" class="section project-section">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-grid">
+                    <article class="project-item">
+                        <img src="images/academic-projects.jpg" alt="Academic Projects" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Academic Explorations</h3>
+                            <p>Conceptual designs and computational experiments.</p>
+                            <a href="#" aria-label="View Academic Projects">View Project</a>
+                        </div>
+                    </article>
+                    <article class="project-item">
+                        <img src="images/EncodeStudio.jpeg" alt="Encode Studio" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Encode Studio</h3>
+                            <p>Data-driven architecture for optimized spatial solutions.</p>
+                            <a href="#" aria-label="View Encode Studio">View Project</a>
+                        </div>
+                    </article>
+                    <article class="project-item">
+                        <img src="images/Acoufelt.png" alt="Acoufelt" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Acoufelt Installation</h3>
+                            <p>Acoustic design and material innovation.</p>
+                            <a href="#" aria-label="View Acoufelt">View Project</a>
+                        </div>
+                    </article>
+                    <article class="project-item">
+                        <img src="images/freelancing.jpg" alt="Freelancing" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Freelance Commissions</h3>
+                            <p>Bespoke modeling and design automation.</p>
+                            <a href="#" aria-label="View Freelance Work">View Project</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>If you're interested in collaborating on a project or learning more about my work, feel free to reach out!</p>
-        <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">View Profile</a></p>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Asem Abdelsalam | Portfolio</p>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Asem Abdelsalam</p>
+        </div>
     </footer>
+
+    <script src="js/script.js" defer></script>
 </body>
 </html>
