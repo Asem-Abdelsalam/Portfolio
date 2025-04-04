@@ -67,7 +67,7 @@ export function initInteractivity() {
 
             if (name && email && message) {
                 formFeedback.textContent = 'Message sent successfully.';
-                formFeedback.classList.add('show'); // Fixed: Added missing closing quote
+                formFeedback.classList.add('show');
                 contactForm.reset();
                 setTimeout(() => formFeedback.classList.remove('show'), 3000);
             } else {
@@ -93,6 +93,12 @@ export function initInteractivity() {
             "Architectural Parametric Modeling",
             "Parametric Furniture Design"
         ];
+        const categories = [
+            "automation",
+            "fabrication",
+            "parametric-modeling",
+            "furniture-design"
+        ];
 
         function updateVideo(index) {
             videos.forEach((video, i) => {
@@ -109,18 +115,18 @@ export function initInteractivity() {
                 const dotCircle = dot.querySelector('.dot-circle');
                 const loadingCircle = dot.querySelector('.loading-circle');
                 if (i === index) {
-                    dotCircle.style.opacity = '1'; // Ensure active dot is fully opaque
-                    // Reset and restart animation
+                    dotCircle.style.opacity = '1';
                     loadingCircle.style.animation = 'none';
-                    loadingCircle.offsetHeight; // Trigger reflow
+                    loadingCircle.offsetHeight;
                     loadingCircle.style.animation = 'drawCircle 7s linear forwards';
                 } else {
-                    dotCircle.style.opacity = '0.3'; // Inactive dots have low opacity
-                    loadingCircle.style.animation = 'none'; // Stop animation for inactive
-                    loadingCircle.setAttribute('stroke-dashoffset', '50.27'); // Reset to start
+                    dotCircle.style.opacity = '0.3';
+                    loadingCircle.style.animation = 'none';
+                    loadingCircle.setAttribute('stroke-dashoffset', '50.27');
                 }
             });
             videoTitle.textContent = titles[index];
+            videoTitle.href = `projects.html?category=${categories[index]}`; // Update href dynamically
             currentIndex = index;
         }
 
@@ -159,6 +165,87 @@ export function initInteractivity() {
                 });
             });
         });
+    }
+
+    // Project Tabs Logic
+    const projectTabs = document.querySelector('.project-tabs');
+    if (projectTabs) {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-tab');
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                projectItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    item.style.display = category === itemCategory ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Check URL parameter to select tab on load
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        if (category) {
+            const matchingButton = document.querySelector(`.tab-button[data-tab="${category}"]`);
+            if (matchingButton) {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                matchingButton.classList.add('active');
+                projectItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    item.style.display = category === itemCategory ? 'block' : 'none';
+                });
+            }
+        } else {
+            // Default to Automation if no category is specified
+            projectItems.forEach(item => {
+                item.style.display = item.getAttribute('data-category') === 'automation' ? 'block' : 'none';
+            });
+        }
+    }
+
+    // Project Detail Logic
+    const projectDetailSection = document.querySelector('#project-detail');
+    if (projectDetailSection) {
+        const projects = {
+            'automation1': {
+                title: 'Workflow Optimization Tool',
+                image: 'images/automation-project1.jpg',
+                description: 'A Grasshopper script automating repetitive design tasks, reducing time by 40%. This project leverages computational design to streamline workflows, integrating Rhino and Grasshopper for precision and efficiency.'
+            },
+            'fabrication1': {
+                title: 'Parametric Facade Panels',
+                image: 'images/fabrication-project1.jpg',
+                description: 'Grasshopper-driven design for CNC-cut facade panels with optimized material use. This project demonstrates the power of parametric modeling in digital fabrication, ensuring both aesthetic appeal and structural integrity.'
+            },
+            'parametric1': {
+                title: 'Complex Roof Structure',
+                image: 'images/parametric-project1.jpg',
+                description: 'Parametric model of a dynamic roof system adapting to environmental factors. Built with Grasshopper, this project showcases advanced computational techniques for architectural innovation.'
+            },
+            'furniture1': {
+                title: 'Custom Parametric Chair',
+                image: 'images/furniture-project1.jpg',
+                description: 'A chair design with adjustable parameters for ergonomics and aesthetics. This project uses Grasshopper to create a flexible, user-centric design adaptable to various preferences and needs.'
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+
+        if (projectId && projects[projectId]) {
+            document.getElementById('project-title').textContent = projects[projectId].title;
+            document.getElementById('project-image').src = projects[projectId].image;
+            document.getElementById('project-image').alt = projects[projectId].title;
+            document.getElementById('project-description').textContent = projects[projectId].description;
+        } else {
+            document.getElementById('project-title').textContent = 'Project Not Found';
+            document.getElementById('project-description').textContent = 'Sorry, the project you are looking for does not exist.';
+        }
     }
 
     window.addEventListener('load', () => window.scrollTo(0, 0));

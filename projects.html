@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | AsemAbdelsalam</title>
+    <title>Projects | Asem Abdelsalam</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -46,29 +46,56 @@
     </div>
 
     <main>
-        <main>
-            <section id="contact" class="section contact-section">
-                <div class="container">
-                    <h2>Contact</h2>
-                    <form class="contact-form" id="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Name" required aria-label="Name">
-                            <span class="form-line"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Email" required aria-label="Email">
-                            <span class="form-line"></span>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Message" required aria-label="Message"></textarea>
-                            <span class="form-line"></span>
-                        </div>
-                        <button type="submit" class="send-button">Submit</button>
-                    </form>
-                    <div class="form-feedback" id="form-feedback"></div>
+        <section id="projects" class="section project-section">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-tabs">
+                    <button class="tab-button active" data-tab="automation">Automation</button>
+                    <button class="tab-button" data-tab="fabrication">Fabrication</button>
+                    <button class="tab-button" data-tab="parametric-modeling">Parametric Modeling</button>
+                    <button class="tab-button" data-tab="furniture-design">Furniture Design</button>
                 </div>
-            </section>
-        </main>
+                <div class="project-grid" id="project-grid">
+                    <!-- Automation -->
+                    <div class="project-item" data-category="automation">
+                        <img src="images/automation-project1.jpg" alt="Automation Project 1" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Workflow Optimization Tool</h3>
+                            <p>A Grasshopper script automating repetitive design tasks, reducing time by 40%.</p>
+                            <a href="project-detail.html?id=automation1" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    <!-- Fabrication -->
+                    <div class="project-item" data-category="fabrication">
+                        <img src="images/fabrication-project1.jpg" alt="Fabrication Project 1" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Parametric Facade Panels</h3>
+                            <p>Grasshopper-driven design for CNC-cut facade panels with optimized material use.</p>
+                            <a href="project-detail.html?id=fabrication1" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    <!-- Parametric Modeling -->
+                    <div class="project-item" data-category="parametric-modeling">
+                        <img src="images/parametric-project1.jpg" alt="Parametric Modeling Project 1" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Complex Roof Structure</h3>
+                            <p>Parametric model of a dynamic roof system adapting to environmental factors.</p>
+                            <a href="project-detail.html?id=parametric1" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    <!-- Furniture Design -->
+                    <div class="project-item" data-category="furniture-design">
+                        <img src="images/furniture-project1.jpg" alt="Furniture Design Project 1" class="project-img" loading="lazy">
+                        <div class="project-text">
+                            <h3>Custom Parametric Chair</h3>
+                            <p>A chair design with adjustable parameters for ergonomics and aesthetics.</p>
+                            <a href="project-detail.html?id=furniture1" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">

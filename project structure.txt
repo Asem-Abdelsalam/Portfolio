@@ -2,6 +2,8 @@ Portfolio/
 ├── index.html
 ├── about.html
 ├── contact.html
+├── projects.html             <!-- New categorized projects page -->
+├── project-detail.html       <!-- New template for individual project pages -->
 ├── css/
 │   ├── style.css
 │   ├── base.css

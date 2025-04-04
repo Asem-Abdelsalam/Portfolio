@@ -41,8 +41,13 @@
     z-index: 10;
     background: rgba(0, 0, 0, 0.5);
     padding: 0.5rem 1rem;
+    text-decoration: none; /* Remove underline */
+    transition: background 0.3s ease; /* Smooth transition for hover */
 }
+.video-title:hover {
 
+    cursor: pointer; /* Indicate clickability */
+}
 .video-controls {
     position: absolute;
     bottom: 2rem;
@@ -526,4 +531,69 @@ h2 {
     height: 500px;
     border: 1px solid #eee;
     background: #eeeeee; /* Match Three.js scene background */
+}
+/* Add to the end of sections.css */
+
+/* Project Tabs */
+.project-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tab-button {
+    padding: 0.75rem 1.5rem;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #555;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.tab-button.active,
+.tab-button:hover {
+    background: #1a3c34;
+    color: #fff;
+}
+
+/* Project Detail Section */
+.project-detail-section {
+    background: #fff;
+    padding: 8rem 0;
+}
+
+.project-detail-img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 2rem 0;
+    object-fit: cover;
+}
+
+#project-description {
+    font-size: 1.125rem;
+    color: #555;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.back-to-projects {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #1a3c34;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.back-to-projects:hover {
+    background: #2e5e56;
 }
