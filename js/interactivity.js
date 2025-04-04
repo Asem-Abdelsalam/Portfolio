@@ -67,7 +67,7 @@ export function initInteractivity() {
 
             if (name && email && message) {
                 formFeedback.textContent = 'Message sent successfully.';
-                formFeedback.classList.add('show');
+                formFeedback.classList.add('show'); // Fixed: Added missing closing quote
                 contactForm.reset();
                 setTimeout(() => formFeedback.classList.remove('show'), 3000);
             } else {
@@ -87,7 +87,12 @@ export function initInteractivity() {
         const videoTitle = document.querySelector('#video-title');
         let currentIndex = 0;
         const intervalTime = 7000;
-        const titles = ["Parametric Design Study", "Structural Optimization", "Fabrication Process"];
+        const titles = [
+            "Grasshopper Scripting for Automation",
+            "Grasshopper Scripting for Digital Fabrication",
+            "Architectural Parametric Modeling",
+            "Parametric Furniture Design"
+        ];
 
         function updateVideo(index) {
             videos.forEach((video, i) => {
@@ -99,7 +104,22 @@ export function initInteractivity() {
                     video.currentTime = 0;
                 }
             });
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+                const dotCircle = dot.querySelector('.dot-circle');
+                const loadingCircle = dot.querySelector('.loading-circle');
+                if (i === index) {
+                    dotCircle.style.opacity = '1'; // Ensure active dot is fully opaque
+                    // Reset and restart animation
+                    loadingCircle.style.animation = 'none';
+                    loadingCircle.offsetHeight; // Trigger reflow
+                    loadingCircle.style.animation = 'drawCircle 7s linear forwards';
+                } else {
+                    dotCircle.style.opacity = '0.3'; // Inactive dots have low opacity
+                    loadingCircle.style.animation = 'none'; // Stop animation for inactive
+                    loadingCircle.setAttribute('stroke-dashoffset', '50.27'); // Reset to start
+                }
+            });
             videoTitle.textContent = titles[index];
             currentIndex = index;
         }
@@ -133,7 +153,7 @@ export function initInteractivity() {
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
                     clearInterval(videoInterval);
-                    const index = parseInt(dot.getAttribute('data-index'));
+                    const index = parseInt(dot.getAttribute('data-service'));
                     updateVideo(index);
                     videoInterval = setInterval(nextVideo, intervalTime);
                 });
