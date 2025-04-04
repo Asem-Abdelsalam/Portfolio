@@ -183,6 +183,18 @@ h2 {
     margin-bottom: 2rem;
 }
 
+.experience-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.experience-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
 .experience-list h3 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -231,6 +243,7 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 .education-section {
     background: #f5f5f5;
 }
@@ -246,6 +259,18 @@ h2 {
 
 .education-list li {
     margin-bottom: 2rem;
+}
+
+.education-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.education-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
 .education-list h3 {
@@ -358,18 +383,11 @@ h2 {
     min-height: 100vh;
     display: grid;
     place-items: center;
-}
-
-.contact-subtitle {
-    font-size: 1.125rem;
-    font-weight: 300;
-    text-align: center;
-    color: #777;
-    margin-bottom: 3rem;
+    padding: 8rem 0; /* Adjusted padding to maintain spacing */
 }
 
 .contact-form {
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     display: flex;
     flex-direction: column;
