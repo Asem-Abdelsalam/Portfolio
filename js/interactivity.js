@@ -4,6 +4,7 @@ export function initInteractivity() {
     const searchBar = document.querySelector('.search-bar');
     const closeSearch = document.querySelector('.close-search');
     const header = document.querySelector('.header');
+    const backToTop = document.querySelector('.back-to-top');
 
     const toggleSearch = () => {
         searchBar.classList.toggle('active');
@@ -28,6 +29,13 @@ export function initInteractivity() {
             header.classList.remove('fade');
         }
     });
+
+    if (backToTop) {
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     const elementsToAnimate = document.querySelectorAll('.section, .project-item, .skills-grid li, .languages-grid li');
     const observer = new IntersectionObserver((entries) => {
