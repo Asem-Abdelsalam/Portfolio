@@ -78,13 +78,13 @@ export function initInteractivity() {
         });
     }
 
-    const videoContainer = document.querySelector('.video-container');
-    if (videoContainer) {
-        const videos = document.querySelectorAll('.hero-video');
+    const imageContainer = document.querySelector('.image-container');
+    if (imageContainer) {
+        const images = document.querySelectorAll('.hero-image');
         const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.querySelector('.video-nav.prev');
-        const nextBtn = document.querySelector('.video-nav.next');
-        const videoTitle = document.querySelector('#video-title');
+        const prevBtn = document.querySelector('.image-nav.prev');
+        const nextBtn = document.querySelector('.image-nav.next');
+        const imageTitle = document.querySelector('#image-title');
         let currentIndex = 0;
         const intervalTime = 7000;
         const titles = [
@@ -100,14 +100,13 @@ export function initInteractivity() {
             "furniture-design"
         ];
 
-        function updateVideo(index) {
-            videos.forEach((video, i) => {
-                video.classList.toggle('active', i === index);
+        function updateImage(index) {
+            images.forEach((image, i) => {
+                image.classList.toggle('active', i === index);
                 if (i === index) {
-                    video.play().catch(() => console.log('Video playback failed.'));
-                } else {
-                    video.pause();
-                    video.currentTime = 0;
+                    image.style.animation = 'none'; // Reset animation
+                    image.offsetHeight; // Trigger reflow
+                    image.style.animation = 'zoomIn 7s linear forwards'; // Reapply animation
                 }
             });
             dots.forEach((dot, i) => {
@@ -125,43 +124,43 @@ export function initInteractivity() {
                     loadingCircle.setAttribute('stroke-dashoffset', '50.27');
                 }
             });
-            videoTitle.textContent = titles[index];
-            videoTitle.href = `projects.html?category=${categories[index]}`; // Update href dynamically
+            imageTitle.textContent = titles[index];
+            imageTitle.href = `projects.html?category=${categories[index]}`;
             currentIndex = index;
         }
 
-        function nextVideo() {
-            const newIndex = (currentIndex + 1) % videos.length;
-            updateVideo(newIndex);
+        function nextImage() {
+            const newIndex = (currentIndex + 1) % images.length;
+            updateImage(newIndex);
         }
 
-        function prevVideo() {
-            const newIndex = (currentIndex - 1 + videos.length) % videos.length;
-            updateVideo(newIndex);
+        function prevImage() {
+            const newIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImage(newIndex);
         }
 
         window.addEventListener('load', () => {
-            videos[0].play().catch(() => console.log('Initial video playback failed.'));
-            let videoInterval = setInterval(nextVideo, intervalTime);
+            updateImage(0); // Start with first image
+            let imageInterval = setInterval(nextImage, intervalTime);
 
             nextBtn.addEventListener('click', () => {
-                clearInterval(videoInterval);
-                nextVideo();
-                videoInterval = setInterval(nextVideo, intervalTime);
+                clearInterval(imageInterval);
+                nextImage();
+                imageInterval = setInterval(nextImage, intervalTime);
             });
 
             prevBtn.addEventListener('click', () => {
-                clearInterval(videoInterval);
-                prevVideo();
-                videoInterval = setInterval(nextVideo, intervalTime);
+                clearInterval(imageInterval);
+                prevImage();
+                imageInterval = setInterval(nextImage, intervalTime);
             });
 
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
-                    clearInterval(videoInterval);
+                    clearInterval(imageInterval);
                     const index = parseInt(dot.getAttribute('data-service'));
-                    updateVideo(index);
-                    videoInterval = setInterval(nextVideo, intervalTime);
+                    updateImage(index);
+                    imageInterval = setInterval(nextImage, intervalTime);
                 });
             });
         });
@@ -187,7 +186,6 @@ export function initInteractivity() {
             });
         });
 
-        // Check URL parameter to select tab on load
         const urlParams = new URLSearchParams(window.location.search);
         const category = urlParams.get('category');
         if (category) {
@@ -201,7 +199,6 @@ export function initInteractivity() {
                 });
             }
         } else {
-            // Default to Automation if no category is specified
             projectItems.forEach(item => {
                 item.style.display = item.getAttribute('data-category') === 'automation' ? 'block' : 'none';
             });

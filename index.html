@@ -47,33 +47,25 @@
 
     <main>
         <section id="hero" class="hero">
-            <div class="video-container">
-                <video class="hero-video active" autoplay muted loop playsinline data-service="0">
-                    <source src="images/automation.mp4" type="video/mp4">
-                </video>
-                <video class="hero-video" muted loop playsinline data-service="1">
-                    <source src="images/fabrication.mp4" type="video/mp4">
-                </video>
-                <video class="hero-video" muted loop playsinline data-service="2">
-                    <source src="images/parametric-modeling.mp4" type="video/mp4">
-                </video>
-                <video class="hero-video" muted loop playsinline data-service="3">
-                    <source src="images/furniture-design.mp4" type="video/mp4">
-                </video>
-                <button class="video-nav prev" aria-label="Previous service">
+            <div class="image-container">
+                <img src="images\hero\automation_project.jpg" alt="Automation Project" class="hero-image active" data-service="0" loading="lazy">
+                <img src="images\hero\fabrication_project.png" alt="Fabrication Project" class="hero-image" data-service="1" loading="lazy">
+                <img src="images\hero\parametric-project.jpg" alt="Parametric Modeling Project" class="hero-image" data-service="2" loading="lazy">
+                <img src="images\hero\furniture_project.jpg" alt="Furniture Design Project" class="hero-image" data-service="3" loading="lazy">
+                <button class="image-nav prev" aria-label="Previous service">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
-                <button class="video-nav next" aria-label="Next service">
+                <button class="image-nav next" aria-label="Next service">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
             </div>
-            <a href="projects.html?category=automation" class="video-title" id="video-title">Grasshopper Scripting for Automation</a> <!-- Updated -->
-            <div class="video-controls">
-                <div class="video-dots">
+            <a href="projects.html?category=automation" class="image-title" id="image-title">Grasshopper Scripting for Automation</a>
+            <div class="image-controls">
+                <div class="image-dots">
                     <svg class="dot active" data-service="0" width="20" height="20">
                         <circle class="dot-circle" cx="10" cy="10" r="4" fill="#fff"/>
                         <circle class="loading-circle" cx="10" cy="10" r="8" fill="none" stroke="#fff" stroke-width="2"/>
@@ -94,6 +86,7 @@
             </div>
         </section>
 
+        <!-- Rest of the file (projects section, footer, etc.) remains unchanged -->
         <section id="projects" class="section project-section">
             <div class="container">
                 <h2>Projects</h2>
