@@ -431,25 +431,24 @@ export function initInteractivity() {
                 }
                 animateOutput();
 
-                // Extend/Contract Logic
+                // Extend/Contract Logic for 3D Viewers
                 const extendButtons = document.querySelectorAll('.extend-btn');
                 extendButtons.forEach(button => {
                     const viewerType = button.getAttribute('data-viewer');
                     const canvas = document.getElementById(`${viewerType}-viewer`);
                     const originalContainer = canvas.parentElement; // Store original container reference
+                    const originalSize = { width: originalContainer.clientWidth, height: originalContainer.clientHeight }; // Store original size
                     let modalDiv = null;
                     let backdrop = null;
 
-                    button.addEventListener('click', (e) => {
-                        e.stopPropagation();
+                    button.addEventListener('click', () => {
                         const isExpanded = canvas.parentElement.classList.contains('viewer-modal');
 
                         if (!isExpanded) {
-                            // Expand
+                            // Expand logic
                             modalDiv = document.createElement('div');
                             modalDiv.classList.add('viewer-modal');
                             modalDiv.appendChild(canvas);
-                            modalDiv.appendChild(button);
 
                             backdrop = document.createElement('div');
                             backdrop.classList.add('viewer-modal-backdrop');
@@ -462,26 +461,13 @@ export function initInteractivity() {
                                 </svg>
                             `;
                             button.setAttribute('aria-label', 'Contract Viewer');
+                            modalDiv.appendChild(button);
 
-                            if (viewerType === 'input') {
-                                inputCamera.aspect = modalDiv.clientWidth / modalDiv.clientHeight;
-                                inputCamera.updateProjectionMatrix();
-                                inputRenderer.setSize(modalDiv.clientWidth, modalDiv.clientHeight);
-                            } else {
-                                outputCamera.aspect = modalDiv.clientWidth / modalDiv.clientHeight;
-                                outputCamera.updateProjectionMatrix();
-                                outputRenderer.setSize(modalDiv.clientWidth, modalDiv.clientHeight);
-                            }
+                            resizeCanvas(modalDiv, viewerType);
 
-                            // Backdrop click to contract
-                            backdrop.addEventListener('click', () => {
-                                console.log(`Backdrop clicked for ${viewerType}`);
-                                contractViewer();
-                            });
-
-                            console.log(`Expanded ${viewerType}`);
+                            backdrop.addEventListener('click', contractViewer);
                         } else {
-                            // Contract
+                            // Contract logic
                             contractViewer();
                         }
                     });
@@ -503,18 +489,32 @@ export function initInteractivity() {
                         `;
                         button.setAttribute('aria-label', 'Expand Viewer');
 
-                        if (viewerType === 'input') {
-                            inputCamera.aspect = inputCanvas.clientWidth / inputCanvas.clientHeight;
-                            inputCamera.updateProjectionMatrix();
-                            inputRenderer.setSize(inputCanvas.clientWidth, inputCanvas.clientHeight);
-                        } else {
-                            outputCamera.aspect = outputCanvas.clientWidth / outputCanvas.clientHeight;
-                            outputCamera.updateProjectionMatrix();
-                            outputRenderer.setSize(outputCanvas.clientWidth, outputCanvas.clientHeight);
-                        }
-
-                        console.log(`Contracted ${viewerType}`);
+                        resizeCanvas(originalContainer, viewerType, originalSize);
                     }
+
+                    function resizeCanvas(container, viewerType, size = null) {
+                        const width = size ? size.width : container.clientWidth;
+                        const height = size ? size.height : container.clientHeight;
+
+                        if (viewerType === 'input') {
+                            inputCamera.aspect = width / height;
+                            inputCamera.updateProjectionMatrix();
+                            inputRenderer.setSize(width, height);
+                        } else {
+                            outputCamera.aspect = width / height;
+                            outputCamera.updateProjectionMatrix();
+                            outputRenderer.setSize(width, height);
+                        }
+                    }
+
+                    // Ensure canvas resizes correctly on window resize
+                    window.addEventListener('resize', () => {
+                        if (canvas.parentElement.classList.contains('viewer-modal')) {
+                            resizeCanvas(modalDiv, viewerType);
+                        } else {
+                            resizeCanvas(originalContainer, viewerType, originalSize);
+                        }
+                    });
                 });
 
                 // Resize event for both viewers
