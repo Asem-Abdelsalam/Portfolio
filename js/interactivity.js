@@ -1,7 +1,9 @@
+// Interactivity Logic
 export function initInteractivity() {
     const searchToggle = document.querySelector('.search-toggle');
     const searchBar = document.querySelector('.search-bar');
     const closeSearch = document.querySelector('.close-search');
+    const header = document.querySelector('.header');
 
     const toggleSearch = () => {
         searchBar.classList.toggle('active');
@@ -19,8 +21,15 @@ export function initInteractivity() {
         }
     });
 
-    const elementsToAnimate = document.querySelectorAll('.section, .project-item, .skills-grid li, .languages-grid li');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('fade');
+        } else {
+            header.classList.remove('fade');
+        }
+    });
 
+    const elementsToAnimate = document.querySelectorAll('.section, .project-item, .skills-grid li, .languages-grid li');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
@@ -41,7 +50,6 @@ export function initInteractivity() {
 
     const contactForm = document.querySelector('#contact-form');
     const formFeedback = document.querySelector('#form-feedback');
-
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -53,15 +61,11 @@ export function initInteractivity() {
                 formFeedback.textContent = 'Message sent successfully.';
                 formFeedback.classList.add('show');
                 contactForm.reset();
-                setTimeout(() => {
-                    formFeedback.classList.remove('show');
-                }, 3000);
+                setTimeout(() => formFeedback.classList.remove('show'), 3000);
             } else {
                 formFeedback.textContent = 'Please fill in all fields.';
                 formFeedback.classList.add('show');
-                setTimeout(() => {
-                    formFeedback.classList.remove('show');
-                }, 3000);
+                setTimeout(() => formFeedback.classList.remove('show'), 3000);
             }
         });
     }
@@ -75,28 +79,19 @@ export function initInteractivity() {
         const videoTitle = document.querySelector('#video-title');
         let currentIndex = 0;
         const intervalTime = 7000;
-
-        const titles = [
-            "Parametric Design Study",
-            "Structural Optimization",
-            "Fabrication Process"
-        ];
+        const titles = ["Parametric Design Study", "Structural Optimization", "Fabrication Process"];
 
         function updateVideo(index) {
             videos.forEach((video, i) => {
                 video.classList.toggle('active', i === index);
                 if (i === index) {
-                    video.play().catch(() => {
-                        console.log('Video playback failed.');
-                    });
+                    video.play().catch(() => console.log('Video playback failed.'));
                 } else {
                     video.pause();
                     video.currentTime = 0;
                 }
             });
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             videoTitle.textContent = titles[index];
             currentIndex = index;
         }
@@ -112,9 +107,7 @@ export function initInteractivity() {
         }
 
         window.addEventListener('load', () => {
-            videos[0].play().catch(() => {
-                console.log('Initial video playback failed.');
-            });
+            videos[0].play().catch(() => console.log('Initial video playback failed.'));
             let videoInterval = setInterval(nextVideo, intervalTime);
 
             nextBtn.addEventListener('click', () => {
@@ -140,7 +133,5 @@ export function initInteractivity() {
         });
     }
 
-    window.addEventListener('load', () => {
-        window.scrollTo(0, 0);
-    });
+    window.addEventListener('load', () => window.scrollTo(0, 0));
 }

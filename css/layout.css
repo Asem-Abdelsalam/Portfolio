@@ -1,28 +1,38 @@
-/* Layout Styles: Header, Nav, Search, Footer */
+/* Layout Styles */
 .header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #000000;
-    padding: 1.35rem 0;
+    background: rgba(0, 0, 0, 1);
+    padding: 0.75rem 0;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+}
+
+.header.fade {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.header:hover {
+    background: rgba(0, 0, 0, 1);
 }
 
 .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 0; /* Move logo further left */
+    padding-left: 0;
 }
 
 .logo {
-    font-size: 1.45rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
-    margin-left: -150px; /* Shift logo further left */
+    margin-left: -150px;
 }
 
 .logo:hover {
@@ -30,20 +40,20 @@
 }
 
 .nav-menu {
-    margin-right: -150px; /* Shift nav list further right */
+    margin-right: -150px;
 }
 
 .nav-list {
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-list a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -59,8 +69,10 @@
 }
 
 .search-icon {
-    stroke: #ffffff; /* Match header text color */
+    stroke: #ffffff;
     transition: stroke 0.3s ease;
+    width: 20px;
+    height: 20px;
 }
 
 .search-toggle:hover .search-icon {
@@ -73,13 +85,13 @@
     border: none;
     cursor: pointer;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
 .hamburger span {
-    width: 25px;
+    width: 20px;
     height: 2px;
-    background: #ffffff; /* Match header text color */
+    background: #ffffff;
     transition: all 0.3s ease;
 }
 
@@ -101,7 +113,7 @@
     left: 0;
     width: 100%;
     background: #fff;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     z-index: 1001;
     transform: translateY(-100%);
     transition: transform 0.3s ease;
@@ -120,8 +132,8 @@
 
 .search-bar input {
     flex: 1;
-    padding: 0.75rem 0;
-    font-size: 1rem;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
     border: none;
     border-bottom: 1px solid #ccc;
     background: transparent;
@@ -142,6 +154,8 @@
 .close-icon {
     stroke: #555;
     transition: stroke 0.3s ease;
+    width: 20px;
+    height: 20px;
 }
 
 .close-search:hover .close-icon {

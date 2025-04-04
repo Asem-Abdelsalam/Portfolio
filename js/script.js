@@ -1,3 +1,4 @@
+// Main Script
 import { initNavigation } from './navigation.js';
 import { initInteractivity } from './interactivity.js';
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhino-like Three.js Viewport</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #707070; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x707070); // Rhino-like background
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Gamma correction for more realistic color and light rendering
+        renderer.gammaFactor = 2.2;
+        renderer.gammaOutput = true;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+
+        // Grid helper (like Rhino viewport)
+        const gridHelper = new THREE.GridHelper(50, 50, 0xffffff, 0x888888);
+        scene.add(gridHelper);
+
+        // Orbit Controls (like Rhino navigation)
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.1;
+        controls.screenSpacePanning = true;
+        controls.minDistance = 1;
+        controls.maxDistance = 100;
+        
+        // Lighting Setup (Improved for back faces)
+        const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5); // Increased ground intensity
+        scene.add(hemisphereLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); // Increased intensity
+        directionalLight.position.set(10, 10, 10); // Removed normalize to keep full intensity
+        scene.add(directionalLight);
+
+        // Add a second directional light for back face illumination
+        const backDirectionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        backDirectionalLight.position.set(-10, -10, -10);
+        scene.add(backDirectionalLight);
+
+        // Add a model to the scene
+        const loader = new THREE.GLTFLoader();
+        const dracoLoader = new THREE.DRACOLoader();
+        dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/draco/');
+        loader.setDRACOLoader(dracoLoader);
+
+        loader.load(
+            'models/model.glb', // Model path relative to the HTML file
+            function (gltf) {
+                scene.add(gltf.scene);
+
+                // Bounding box for camera positioning
+                const box = new THREE.Box3().setFromObject(gltf.scene);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                const maxSize = Math.max(size.x, size.y, size.z);
+
+                // Camera positioning
+                const distance = maxSize * 2.5;
+                camera.position.set(center.x, center.y + maxSize * 1.5, center.z + distance);
+                camera.up = new THREE.Vector3(0, 1, 0);
+                camera.lookAt(center.x, center.y, center.z);
+
+                controls.target.set(center.x, center.y, center.z);
+                controls.update();
+
+                // Adjust materials for consistent rendering
+                gltf.scene.traverse((child) => {
+                    if (child.isMesh) {
+                        child.geometry.computeVertexNormals(); // Ensure normals are correct
+
+                        const material = new THREE.MeshStandardMaterial({
+                            roughness: 0.5,
+                            metalness: 0.2,
+                            color: child.material.color ? child.material.color : 0xaaaaaa,
+                            map: child.material.map,
+                            emissive: child.material.emissive,
+                            normalMap: child.material.normalMap,
+                            bumpMap: child.material.bumpMap,
+                            side: THREE.DoubleSide,
+                            transparent: child.material.transparent || false,
+                            opacity: child.material.opacity !== undefined ? child.material.opacity : 1
+                        });
+                        child.material = material;
+                    }
+                });
+            },
+            undefined,
+            function (error) {
+                console.error('Error loading model:', error);
+            }
+        );
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Resize event
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

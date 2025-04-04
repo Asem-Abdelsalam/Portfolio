@@ -56,16 +56,24 @@
             <video class="hero-video" muted loop playsinline data-index="2">
                 <source src="images/video3.mp4" type="video/mp4">
             </video>
+            <button class="video-nav prev" aria-label="Previous video">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="video-nav next" aria-label="Next video">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
         </div>
         <div class="video-title" id="video-title">Parametric Design Study</div>
         <div class="video-controls">
-            <button class="video-nav prev" aria-label="Previous video">←</button>
             <div class="video-dots">
                 <span class="dot active" data-index="0"></span>
                 <span class="dot" data-index="1"></span>
                 <span class="dot" data-index="2"></span>
             </div>
-            <button class="video-nav next" aria-label="Next video">→</button>
         </div>
     </section>
 
@@ -116,8 +124,7 @@
             <p>© 2025 Asem Abdelsalam</p>
         </div>
     </footer>
- 
-    
-    <script src="js/script.js" defer></script>
+
+    <script src="js/script.js" type="module"></script>
 </body>
 </html>
