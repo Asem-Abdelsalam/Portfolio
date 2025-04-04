@@ -49,8 +49,54 @@
         <section id="project-detail" class="section project-detail-section">
             <div class="container">
                 <h2 id="project-title"></h2>
-                <img id="project-image" src="" alt="" class="project-detail-img" loading="lazy">
-                <p id="project-description"></p>
+                
+                <!-- Image Slider -->
+                <div class="image-slider">
+                    <div class="slider-container">
+                        <img id="input-image" src="" alt="Input" class="slider-image input" loading="lazy">
+                        <img id="output-image" src="" alt="Output" class="slider-image output" loading="lazy">
+                        <div class="slider-handle"></div>
+                    </div>
+                    <div class="slider-labels">
+                        <span>Input</span>
+                        <span>Output</span>
+                    </div>
+                </div>
+
+                <!-- Overview Section -->
+                <div class="project-overview">
+                    <h3>Overview</h3>
+                    <p id="project-overview"></p>
+                </div>
+
+                <!-- Logic Section -->
+                <div class="project-logic">
+                    <h3>Logic Behind the Script</h3>
+                    <p id="project-logic"></p>
+                </div>
+
+                <!-- 3D Viewers -->
+                <div class="model-viewers">
+                    <div class="viewer-container">
+                        <h4>Input</h4>
+                        <canvas id="input-viewer" class="viewer"></canvas>
+                        <button class="extend-btn" data-viewer="input" aria-label="Expand Viewer">
+                            <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h6v6M14 20h6v-6M10 10l-6-6M20 14l-6 6"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="viewer-container">
+                        <h4>Output</h4>
+                        <canvas id="output-viewer" class="viewer"></canvas>
+                        <button class="extend-btn" data-viewer="output" aria-label="Expand Viewer">
+                            <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h6v6M14 20h6v-6M10 10l-6-6M20 14l-6 6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
                 <a href="projects.html" class="back-to-projects">Back to Projects</a>
             </div>
         </section>
@@ -90,6 +136,10 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
     <script src="js/script.js" type="module"></script>
 </body>
 </html>

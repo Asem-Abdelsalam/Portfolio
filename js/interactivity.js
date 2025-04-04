@@ -104,9 +104,9 @@ export function initInteractivity() {
             images.forEach((image, i) => {
                 image.classList.toggle('active', i === index);
                 if (i === index) {
-                    image.style.animation = 'none'; // Reset animation
-                    image.offsetHeight; // Trigger reflow
-                    image.style.animation = 'zoomIn 7s linear forwards'; // Reapply animation
+                    image.style.animation = 'none';
+                    image.offsetHeight;
+                    image.style.animation = 'zoomIn 7s linear forwards';
                 }
             });
             dots.forEach((dot, i) => {
@@ -140,7 +140,7 @@ export function initInteractivity() {
         }
 
         window.addEventListener('load', () => {
-            updateImage(0); // Start with first image
+            updateImage(0);
             let imageInterval = setInterval(nextImage, intervalTime);
 
             nextBtn.addEventListener('click', () => {
@@ -210,9 +210,40 @@ export function initInteractivity() {
     if (projectDetailSection) {
         const projects = {
             'automation1': {
-                title: 'Workflow Optimization Tool',
-                image: 'images/automation-project1.jpg',
-                description: 'A Grasshopper script automating repetitive design tasks, reducing time by 40%. This project leverages computational design to streamline workflows, integrating Rhino and Grasshopper for precision and efficiency.'
+                title: 'Product Detail Drawings Automation',
+                inputImage: 'images/projects/Automation/productdetails/before.png',
+                outputImage: 'images/projects/Automation/productdetails/after.png',
+                overview: 'Creating a complete product detail with schedule by inputting one or more detail models.',
+                logic: 'This script automates the generation of detailed drawings and schedules by parsing input models, extracting key parameters, and organizing them into a structured output using Grasshopper and Rhino APIs.',
+                inputModel: 'models/automation1-before.glb',
+                outputModel: 'models/automation1-after.glb'
+            },
+            'automation2': {
+                title: '2D Product Cutfiles to 3D Models',
+                inputImage: 'images/automation2-before.jpg',
+                outputImage: 'images/automation2-after.jpg',
+                overview: 'A script that reads cutfiles to produce detail models.',
+                logic: 'The script interprets 2D cutfile data (e.g., DXF files), reconstructs the geometry in 3D space using parametric rules, and outputs a fully detailed 3D model in Grasshopper.',
+                inputModel: 'models/automation2-before.glb',
+                outputModel: 'models/automation2-after.glb'
+            },
+            'automation3': {
+                title: '3D Models to 2D Product Cutfiles',
+                inputImage: 'images/automation3-before.jpg',
+                outputImage: 'images/automation3-after.jpg',
+                overview: 'A script that reads detail models and outputs cutfiles.',
+                logic: 'This script deconstructs 3D models into planar sections, generates 2D cut patterns, and exports them as cutfiles (e.g., DXF) optimized for fabrication, leveraging Grasshopper’s geometric analysis.',
+                inputModel: 'models/automation3-before.glb',
+                outputModel: 'models/automation3-after.glb'
+            },
+            'automation4': {
+                title: 'Controlled Angle Chamfer',
+                inputImage: 'images/automation4-before.jpg',
+                outputImage: 'images/automation4-after.jpg',
+                overview: 'Beveling the edges with any degree or depth when modeling.',
+                logic: 'The script applies parametric chamfering to model edges, allowing users to specify angle and depth via inputs, and dynamically updates the geometry using Grasshopper’s computational framework.',
+                inputModel: 'models/automation4-before.glb',
+                outputModel: 'models/automation4-after.glb'
             },
             'fabrication1': {
                 title: 'Parametric Facade Panels',
@@ -235,13 +266,344 @@ export function initInteractivity() {
         const projectId = urlParams.get('id');
 
         if (projectId && projects[projectId]) {
-            document.getElementById('project-title').textContent = projects[projectId].title;
-            document.getElementById('project-image').src = projects[projectId].image;
-            document.getElementById('project-image').alt = projects[projectId].title;
-            document.getElementById('project-description').textContent = projects[projectId].description;
+            const project = projects[projectId];
+            document.getElementById('project-title').textContent = project.title;
+
+            if (project.inputImage && project.outputImage) {
+                document.getElementById('input-image').src = project.inputImage;
+                document.getElementById('output-image').src = project.outputImage;
+                document.getElementById('project-overview').textContent = project.overview;
+                document.getElementById('project-logic').textContent = project.logic;
+
+                // Three.js Setup for Input Viewer
+                const inputCanvas = document.getElementById('input-viewer');
+                const inputScene = new THREE.Scene();
+                inputScene.background = new THREE.Color(0x707070);
+                const inputCamera = new THREE.PerspectiveCamera(75, inputCanvas.clientWidth / inputCanvas.clientHeight, 0.1, 1000);
+                const inputRenderer = new THREE.WebGLRenderer({ canvas: inputCanvas, antialias: true });
+                inputRenderer.setSize(inputCanvas.clientWidth, inputCanvas.clientHeight);
+                inputRenderer.gammaFactor = 2.2;
+                inputRenderer.gammaOutput = true;
+                inputRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+                inputRenderer.toneMappingExposure = 1.0;
+
+                const inputGrid = new THREE.GridHelper(50, 50, 0xffffff, 0x888888);
+                inputScene.add(inputGrid);
+
+                const inputControls = new THREE.OrbitControls(inputCamera, inputRenderer.domElement);
+                inputControls.enableDamping = true;
+                inputControls.dampingFactor = 0.1;
+                inputControls.screenSpacePanning = true;
+                inputControls.minDistance = 1;
+                inputControls.maxDistance = 100;
+
+                const inputHemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
+                inputScene.add(inputHemiLight);
+                const inputDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+                inputDirLight.position.set(10, 10, 10);
+                inputScene.add(inputDirLight);
+                const inputBackDirLight = new THREE.DirectionalLight(0xffffff, 1);
+                inputBackDirLight.position.set(-10, -10, -10);
+                inputScene.add(inputBackDirLight);
+
+                const inputLoader = new THREE.GLTFLoader();
+                const dracoLoader = new THREE.DRACOLoader();
+                dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/draco/');
+                inputLoader.setDRACOLoader(dracoLoader);
+
+                inputLoader.load(project.inputModel, (gltf) => {
+                    const model = gltf.scene;
+                    inputScene.add(model);
+                    const box = new THREE.Box3().setFromObject(model);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    const maxSize = Math.max(size.x, size.y, size.z);
+                    const distance = maxSize * 2.5;
+                    inputCamera.position.set(center.x, center.y + maxSize * 1.5, center.z + distance);
+                    inputCamera.up = new THREE.Vector3(0, 1, 0);
+                    inputCamera.lookAt(center);
+                    inputControls.target.set(center.x, center.y, center.z);
+                    inputControls.update();
+
+                    model.traverse((child) => {
+                        if (child.isMesh) {
+                            child.geometry.computeVertexNormals();
+                            const material = new THREE.MeshStandardMaterial({
+                                roughness: 0.5,
+                                metalness: 0.2,
+                                color: child.material.color || 0xaaaaaa,
+                                map: child.material.map,
+                                emissive: child.material.emissive,
+                                normalMap: child.material.normalMap,
+                                bumpMap: child.material.bumpMap,
+                                side: THREE.DoubleSide,
+                                transparent: child.material.transparent || false,
+                                opacity: child.material.opacity !== undefined ? child.material.opacity : 1
+                            });
+                            child.material = material;
+                        }
+                    });
+                }, undefined, (error) => {
+                    console.error('Error loading input model:', error);
+                });
+
+                function animateInput() {
+                    requestAnimationFrame(animateInput);
+                    inputControls.update();
+                    inputRenderer.render(inputScene, inputCamera);
+                }
+                animateInput();
+
+                // Three.js Setup for Output Viewer
+                const outputCanvas = document.getElementById('output-viewer');
+                const outputScene = new THREE.Scene();
+                outputScene.background = new THREE.Color(0x707070);
+                const outputCamera = new THREE.PerspectiveCamera(75, outputCanvas.clientWidth / outputCanvas.clientHeight, 0.1, 1000);
+                const outputRenderer = new THREE.WebGLRenderer({ canvas: outputCanvas, antialias: true });
+                outputRenderer.setSize(outputCanvas.clientWidth, outputCanvas.clientHeight);
+                outputRenderer.gammaFactor = 2.2;
+                outputRenderer.gammaOutput = true;
+                outputRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+                outputRenderer.toneMappingExposure = 1.0;
+
+                const outputGrid = new THREE.GridHelper(50, 50, 0xffffff, 0x888888);
+                outputScene.add(outputGrid);
+
+                const outputControls = new THREE.OrbitControls(outputCamera, outputRenderer.domElement);
+                outputControls.enableDamping = true;
+                outputControls.dampingFactor = 0.1;
+                outputControls.screenSpacePanning = true;
+                outputControls.minDistance = 1;
+                outputControls.maxDistance = 100;
+
+                const outputHemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
+                outputScene.add(outputHemiLight);
+                const outputDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+                outputDirLight.position.set(10, 10, 10);
+                outputScene.add(outputDirLight);
+                const outputBackDirLight = new THREE.DirectionalLight(0xffffff, 1);
+                outputBackDirLight.position.set(-10, -10, -10);
+                outputScene.add(outputBackDirLight);
+
+                const outputLoader = new THREE.GLTFLoader();
+                outputLoader.setDRACOLoader(dracoLoader);
+
+                outputLoader.load(project.outputModel, (gltf) => {
+                    const model = gltf.scene;
+                    outputScene.add(model);
+                    const box = new THREE.Box3().setFromObject(model);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    const maxSize = Math.max(size.x, size.y, size.z);
+                    const distance = maxSize * 2.5;
+                    outputCamera.position.set(center.x, center.y + maxSize * 1.5, center.z + distance);
+                    outputCamera.up = new THREE.Vector3(0, 1, 0);
+                    outputCamera.lookAt(center);
+                    outputControls.target.set(center.x, center.y, center.z);
+                    outputControls.update();
+
+                    model.traverse((child) => {
+                        if (child.isMesh) {
+                            child.geometry.computeVertexNormals();
+                            const material = new THREE.MeshStandardMaterial({
+                                roughness: 0.5,
+                                metalness: 0.2,
+                                color: child.material.color || 0xaaaaaa,
+                                map: child.material.map,
+                                emissive: child.material.emissive,
+                                normalMap: child.material.normalMap,
+                                bumpMap: child.material.bumpMap,
+                                side: THREE.DoubleSide,
+                                transparent: child.material.transparent || false,
+                                opacity: child.material.opacity !== undefined ? child.material.opacity : 1
+                            });
+                            child.material = material;
+                        }
+                    });
+                }, undefined, (error) => {
+                    console.error('Error loading output model:', error);
+                });
+
+                function animateOutput() {
+                    requestAnimationFrame(animateOutput);
+                    outputControls.update();
+                    outputRenderer.render(outputScene, outputCamera);
+                }
+                animateOutput();
+
+                // Extend/Contract Logic
+                const extendButtons = document.querySelectorAll('.extend-btn');
+                extendButtons.forEach(button => {
+                    const viewerType = button.getAttribute('data-viewer');
+                    const canvas = document.getElementById(`${viewerType}-viewer`);
+                    const originalContainer = canvas.parentElement; // Store original container reference
+                    let modalDiv = null;
+                    let backdrop = null;
+
+                    button.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isExpanded = canvas.parentElement.classList.contains('viewer-modal');
+
+                        if (!isExpanded) {
+                            // Expand
+                            modalDiv = document.createElement('div');
+                            modalDiv.classList.add('viewer-modal');
+                            modalDiv.appendChild(canvas);
+                            modalDiv.appendChild(button);
+
+                            backdrop = document.createElement('div');
+                            backdrop.classList.add('viewer-modal-backdrop');
+                            document.body.appendChild(backdrop);
+                            document.body.appendChild(modalDiv);
+
+                            button.innerHTML = `
+                                <svg class="contract-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 4h-6v6M4 20h6v-6M14 14l6-6M10 10l-6 6"/>
+                                </svg>
+                            `;
+                            button.setAttribute('aria-label', 'Contract Viewer');
+
+                            if (viewerType === 'input') {
+                                inputCamera.aspect = modalDiv.clientWidth / modalDiv.clientHeight;
+                                inputCamera.updateProjectionMatrix();
+                                inputRenderer.setSize(modalDiv.clientWidth, modalDiv.clientHeight);
+                            } else {
+                                outputCamera.aspect = modalDiv.clientWidth / modalDiv.clientHeight;
+                                outputCamera.updateProjectionMatrix();
+                                outputRenderer.setSize(modalDiv.clientWidth, modalDiv.clientHeight);
+                            }
+
+                            // Backdrop click to contract
+                            backdrop.addEventListener('click', () => {
+                                console.log(`Backdrop clicked for ${viewerType}`);
+                                contractViewer();
+                            });
+
+                            console.log(`Expanded ${viewerType}`);
+                        } else {
+                            // Contract
+                            contractViewer();
+                        }
+                    });
+
+                    function contractViewer() {
+                        if (!originalContainer) {
+                            console.error(`Original container not defined for ${viewerType}`);
+                            return;
+                        }
+                        originalContainer.appendChild(canvas);
+                        originalContainer.appendChild(button);
+                        if (modalDiv) modalDiv.remove();
+                        if (backdrop) backdrop.remove();
+
+                        button.innerHTML = `
+                            <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h6v6M14 20h6v-6M10 10l-6-6M20 14l-6 6"/>
+                            </svg>
+                        `;
+                        button.setAttribute('aria-label', 'Expand Viewer');
+
+                        if (viewerType === 'input') {
+                            inputCamera.aspect = inputCanvas.clientWidth / inputCanvas.clientHeight;
+                            inputCamera.updateProjectionMatrix();
+                            inputRenderer.setSize(inputCanvas.clientWidth, inputCanvas.clientHeight);
+                        } else {
+                            outputCamera.aspect = outputCanvas.clientWidth / outputCanvas.clientHeight;
+                            outputCamera.updateProjectionMatrix();
+                            outputRenderer.setSize(outputCanvas.clientWidth, outputCanvas.clientHeight);
+                        }
+
+                        console.log(`Contracted ${viewerType}`);
+                    }
+                });
+
+                // Resize event for both viewers
+                window.addEventListener('resize', () => {
+                    if (!inputCanvas.parentElement.classList.contains('viewer-modal')) {
+                        inputCamera.aspect = inputCanvas.clientWidth / inputCanvas.clientHeight;
+                        inputCamera.updateProjectionMatrix();
+                        inputRenderer.setSize(inputCanvas.clientWidth, inputCanvas.clientHeight);
+                    } else {
+                        const modal = inputCanvas.parentElement;
+                        inputCamera.aspect = modal.clientWidth / modal.clientHeight;
+                        inputCamera.updateProjectionMatrix();
+                        inputRenderer.setSize(modal.clientWidth, modal.clientHeight);
+                    }
+
+                    if (!outputCanvas.parentElement.classList.contains('viewer-modal')) {
+                        outputCamera.aspect = outputCanvas.clientWidth / outputCanvas.clientHeight;
+                        outputCamera.updateProjectionMatrix();
+                        outputRenderer.setSize(outputCanvas.clientWidth, outputCanvas.clientHeight);
+                    } else {
+                        const modal = outputCanvas.parentElement;
+                        outputCamera.aspect = modal.clientWidth / modal.clientHeight;
+                        outputCamera.updateProjectionMatrix();
+                        outputRenderer.setSize(modal.clientWidth, modal.clientHeight);
+                    }
+                });
+            } else {
+                document.getElementById('input-image').style.display = 'none';
+                document.getElementById('output-image').style.display = 'none';
+                document.querySelector('.image-slider').style.display = 'none';
+                document.querySelector('.project-overview').style.display = 'none';
+                document.querySelector('.project-logic').style.display = 'none';
+                document.querySelector('.model-viewers').style.display = 'none';
+                document.getElementById('project-overview').textContent = project.description;
+            }
         } else {
             document.getElementById('project-title').textContent = 'Project Not Found';
-            document.getElementById('project-description').textContent = 'Sorry, the project you are looking for does not exist.';
+            document.querySelector('.image-slider').style.display = 'none';
+            document.querySelector('.project-overview').textContent = 'Sorry, the project you are looking for does not exist.';
+            document.querySelector('.project-logic').style.display = 'none';
+            document.querySelector('.model-viewers').style.display = 'none';
+        }
+
+        // Image Slider Logic (unchanged)
+        const sliderHandle = document.querySelector('.slider-handle');
+        const sliderContainer = document.querySelector('.slider-container');
+        const inputImage = document.querySelector('.slider-image.input');
+        if (sliderHandle && sliderContainer && inputImage) {
+            let isDragging = false;
+
+            sliderHandle.addEventListener('mousedown', () => {
+                isDragging = true;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const rect = sliderContainer.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                sliderHandle.style.left = `${x}px`;
+                inputImage.style.clipPath = `inset(0 ${rect.width - x}px 0 0)`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            sliderHandle.addEventListener('touchstart', () => {
+                isDragging = true;
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const rect = sliderContainer.getBoundingClientRect();
+                let x = e.touches[0].clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                sliderHandle.style.left = `${x}px`;
+                inputImage.style.clipPath = `inset(0 ${rect.width - x}px 0 0)`;
+            });
+
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            const rect = sliderContainer.getBoundingClientRect();
+            sliderHandle.style.left = `${rect.width / 2}px`;
+            inputImage.style.clipPath = `inset(0 ${rect.width / 2}px 0 0)`;
         }
     }
 
