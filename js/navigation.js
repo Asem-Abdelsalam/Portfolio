@@ -1,4 +1,4 @@
-// Navigation Logic
+// Handles navigation menu toggle and click outside to close
 export function initNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navList = document.querySelector('.nav-list');

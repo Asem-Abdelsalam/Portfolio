@@ -1,4 +1,4 @@
-// Interactivity Logic
+// Handles various interactive features like search bar, animations, and sliders
 export function initInteractivity() {
     const searchToggle = document.querySelector('.search-toggle');
     const searchBar = document.querySelector('.search-bar');
@@ -6,6 +6,7 @@ export function initInteractivity() {
     const header = document.querySelector('.header');
     const backToTop = document.querySelector('.back-to-top');
 
+    // Toggles the search bar visibility
     const toggleSearch = () => {
         searchBar.classList.toggle('active');
         if (searchBar.classList.contains('active')) {
@@ -16,20 +17,19 @@ export function initInteractivity() {
     searchToggle.addEventListener('click', toggleSearch);
     closeSearch.addEventListener('click', toggleSearch);
 
+    // Closes the search bar on pressing Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && searchBar.classList.contains('active')) {
             toggleSearch();
         }
     });
 
+    // Adds a fade effect to the header on scroll
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('fade');
-        } else {
-            header.classList.remove('fade');
-        }
+        header.classList.toggle('fade', window.scrollY > 50);
     });
 
+    // Smooth scroll to top
     if (backToTop) {
         backToTop.addEventListener('click', (e) => {
             e.preventDefault();
@@ -37,6 +37,7 @@ export function initInteractivity() {
         });
     }
 
+    // Animates elements when they come into view
     const elementsToAnimate = document.querySelectorAll('.section, .project-item, .skills-grid li, .languages-grid li');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
@@ -56,6 +57,7 @@ export function initInteractivity() {
         observer.observe(el);
     });
 
+    // Handles contact form submission
     const contactForm = document.querySelector('#contact-form');
     const formFeedback = document.querySelector('#form-feedback');
     if (contactForm) {
@@ -78,6 +80,7 @@ export function initInteractivity() {
         });
     }
 
+    // Image slider logic for hero section
     const imageContainer = document.querySelector('.image-container');
     if (imageContainer) {
         const images = document.querySelectorAll('.hero-image');
@@ -100,6 +103,7 @@ export function initInteractivity() {
             "furniture-design"
         ];
 
+        // Updates the active image and dot in the slider
         function updateImage(index) {
             images.forEach((image, i) => {
                 image.classList.toggle('active', i === index);
@@ -129,16 +133,19 @@ export function initInteractivity() {
             currentIndex = index;
         }
 
+        // Moves to the next image in the slider
         function nextImage() {
             const newIndex = (currentIndex + 1) % images.length;
             updateImage(newIndex);
         }
 
+        // Moves to the previous image in the slider
         function prevImage() {
             const newIndex = (currentIndex - 1 + images.length) % images.length;
             updateImage(newIndex);
         }
 
+        // Initializes the slider on page load
         window.addEventListener('load', () => {
             updateImage(0);
             let imageInterval = setInterval(nextImage, intervalTime);
@@ -166,7 +173,7 @@ export function initInteractivity() {
         });
     }
 
-    // Project Tabs Logic
+    // Project tabs logic for filtering projects
     const projectTabs = document.querySelector('.project-tabs');
     if (projectTabs) {
         const tabButtons = document.querySelectorAll('.tab-button');
@@ -205,7 +212,7 @@ export function initInteractivity() {
         }
     }
 
-    // Project Detail Logic
+    // Project detail logic for displaying project-specific information
     const projectDetailSection = document.querySelector('#project-detail');
     if (projectDetailSection) {
         const projects = {
@@ -607,5 +614,6 @@ export function initInteractivity() {
         }
     }
 
+    // Scroll to top on page load
     window.addEventListener('load', () => window.scrollTo(0, 0));
 }
