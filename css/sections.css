@@ -1,4 +1,34 @@
-/* Section Styles: Hero, About, Projects, Skills, Contact */
+/******************************************************************************
+ * TABLE OF CONTENTS
+ * ------------------
+ * 1. Shared Styles
+ * 2. Index Page (index.html)
+ * 3. About Page (about.html) 
+ * 4. Projects Page (projects.html)
+ * 5. Project Detail Page (project-detail.html)
+ * 6. Contact Page (contact.html)
+ ******************************************************************************/
+
+/******************************************************************************
+ * 1. SHARED STYLES 
+ ******************************************************************************/
+.section {
+    padding: 8rem 0;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 4rem;
+    text-align: center;
+    color: #1a3c34;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/******************************************************************************
+ * 2. INDEX PAGE STYLES (index.html)
+ ******************************************************************************/
 .hero {
     position: relative;
     height: 100vh;
@@ -140,21 +170,9 @@
     }
 }
 
-/* Rest of the styles unchanged */
-.section {
-    padding: 8rem 0;
-}
-
-h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 4rem;
-    text-align: center;
-    color: #1a3c34;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
+/******************************************************************************
+ * 3. ABOUT PAGE STYLES (about.html)
+ ******************************************************************************/
 .about-section {
     background: #fff;
     padding: 8rem 0;
@@ -356,6 +374,9 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/******************************************************************************
+ * 4. PROJECTS PAGE STYLES (projects.html)
+ ******************************************************************************/
 .project-section {
     background: #fff;
 }
@@ -413,140 +434,6 @@ h2 {
     color: #2e5e56;
 }
 
-.contact-section {
-    background: #fff;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 8rem 0;
-}
-
-.contact-form {
-    max-width: 600px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.form-group {
-    position: relative;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 1rem 0;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    color: #333;
-    font-size: 1rem;
-    font-family: 'Montserrat', sans-serif;
-    resize: none;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-bottom-color: #1a3c34;
-}
-
-.contact-form textarea {
-    min-height: 120px;
-}
-
-.form-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: #1a3c34;
-    transition: width 0.3s ease;
-}
-
-.contact-form input:focus ~ .form-line,
-.contact-form textarea:focus ~ .form-line {
-    width: 100%;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #999;
-}
-
-.send-button {
-    align-self: center;
-    padding: 1rem 3rem;
-    background: #1a3c34;
-    border: none;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.send-button:hover {
-    background: #2e5e56;
-}
-
-.form-feedback {
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    color: #1a3c34;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.form-feedback.show {
-    opacity: 1;
-}
-
-/* Configurator Styles */
-.configurator-section {
-    background: #fff;
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-}
-
-.configurator-subtitle {
-    font-size: 1.125rem;
-    font-weight: 300;
-    text-align: center;
-    color: #777;
-    margin-bottom: 3rem;
-}
-
-.configurator-container {
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-}
-
-#model-upload {
-    display: block;
-    margin: 0 auto 2rem;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #f5f5f5;
-    cursor: pointer;
-}
-
-#viewer {
-    width: 100%;
-    height: 500px;
-    border: 1px solid #eee;
-    background: #eeeeee; /* Match Three.js scene background */
-}
-/* Add to the end of sections.css */
-
 /* Project Tabs */
 .project-tabs {
     display: flex;
@@ -573,7 +460,9 @@ h2 {
     color: #fff;
 }
 
-/* Project Detail Section */
+/******************************************************************************
+ * 5. PROJECT DETAIL PAGE STYLES (project-detail.html)
+ ******************************************************************************/
 .project-detail-section {
     background: #fff;
     padding: 8rem 0;
@@ -610,6 +499,7 @@ h2 {
 .back-to-projects:hover {
     background: #2e5e56;
 }
+
 /* Image Slider */
 .image-slider {
     position: relative;
@@ -684,7 +574,7 @@ h2 {
     font-size: 1rem;
     color: #555;
 }
-/* 3D Viewers */
+
 /* 3D Viewers */
 .model-viewers {
     display: flex;
@@ -796,3 +686,100 @@ h2 {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
+/******************************************************************************
+ * 6. CONTACT PAGE STYLES (contact.html)
+ ******************************************************************************/
+.contact-section {
+    background: #fff;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 8rem 0;
+}
+
+.contact-form {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-bottom-color: #1a3c34;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+}
+
+.form-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #1a3c34;
+    transition: width 0.3s ease;
+}
+
+.contact-form input:focus ~ .form-line,
+.contact-form textarea:focus ~ .form-line {
+    width: 100%;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #999;
+}
+
+.send-button {
+    align-self: center;
+    padding: 1rem 3rem;
+    background: #1a3c34;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.send-button:hover {
+    background: #2e5e56;
+}
+
+.form-feedback {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #1a3c34;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-feedback.show {
+    opacity: 1;
+}
+
