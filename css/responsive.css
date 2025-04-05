@@ -84,3 +84,32 @@
         bottom: 3rem;
     }
 }
+@media (max-width: 768px) {
+    .hero {
+        height: calc(100vh - 3rem); /* Slightly more padding for mobile header */
+        max-height: 100vh; /* Hard cap to prevent overflow */
+    }
+
+    .image-container {
+        height: 100%;
+    }
+
+    .hero-image {
+        object-fit: cover; /* Already present, just confirming */
+        max-height: 100%; /* Ensure images don’t exceed container */
+    }
+
+    .image-title {
+        font-size: 1rem; /* Smaller title on mobile */
+        bottom: 3rem; /* Adjust to fit above progress bars */
+        left: 20px; /* Slightly more padding from edge */
+    }
+
+    .image-controls {
+        bottom: 0.5rem; /* Closer to bottom on mobile */
+    }
+
+    .progress-bar {
+        width: 40px; /* Smaller bars for mobile */
+    }
+}
