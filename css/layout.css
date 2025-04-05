@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 0;
+    padding: 0 4rem;
 }
 
 .logo {
@@ -32,16 +32,12 @@
     color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
-    margin-left: -150px;
 }
 
 .logo:hover {
     color: #ffffff;
 }
 
-.nav-menu {
-    margin-right: -150px;
-}
 
 .nav-list {
     display: flex;

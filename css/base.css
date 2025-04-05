@@ -38,4 +38,7 @@ button {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
+    width: 100%; /* Add this */
+    max-width: 100%; /* Add this */
+    box-sizing: border-box; /* Already present, just confirming */
 }
