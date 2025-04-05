@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Sub: Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sub: Document links -->
     <title>Asem Abdelsalam</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/logo.png" type="image/png">
@@ -10,8 +12,11 @@
 </head>
 <body>
     <header class="header">
+        <!-- Sub: Container wrapper -->
         <div class="container">
+            <!-- Sub: Site logo -->
             <a href="index.html" class="logo" aria-label="Home">Asem Abdelsalam</a>
+            <!-- Sub: Navigation menu -->
             <nav class="nav-menu" aria-label="Main navigation">
                 <ul class="nav-list">
                     <li><a href="about.html">About</a></li>
@@ -34,6 +39,7 @@
     </header>
 
     <div id="search-bar" class="search-bar" role="search">
+        <!-- Sub: Search container -->
         <div class="container">
             <input type="search" placeholder="Search projects..." id="search-input" aria-label="Search projects">
             <button class="close-search" aria-label="Close search">
@@ -47,21 +53,12 @@
 
     <main>
         <section id="hero" class="hero">
+            <!-- Sub: Image slideshow -->
             <div class="image-container">
                 <img src="images\hero\automation_project.jpg" alt="Automation Project" class="hero-image active" data-service="0" loading="lazy">
                 <img src="images\hero\fabrication_project.png" alt="Fabrication Project" class="hero-image" data-service="1" loading="lazy">
                 <img src="images\hero\parametric-project.jpg" alt="Parametric Modeling Project" class="hero-image" data-service="2" loading="lazy">
                 <img src="images\hero\furniture_project.jpg" alt="Furniture Design Project" class="hero-image" data-service="3" loading="lazy">
-                <button class="image-nav prev" aria-label="Previous service">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <button class="image-nav next" aria-label="Next service">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
             </div>
             <a href="projects.html?category=automation" class="image-title" id="image-title">Grasshopper Scripting for Automation</a>
             <div class="image-controls">
@@ -83,8 +80,8 @@
             </div>
         </section>
 
-        <!-- Rest of the file (projects section, footer, etc.) remains unchanged -->
         <section id="projects" class="section project-section">
+            <!-- Sub: Projects container -->
             <div class="container">
                 <h2>Projects</h2>
                 <div class="project-grid">
@@ -129,7 +126,9 @@
         </section>
     </main>
 
+
     <footer class="footer">
+        <!-- Sub: Footer content -->
         <div class="container">
             <nav class="footer-nav">
                 <a href="about.html">About</a>

@@ -85,8 +85,6 @@ export function initInteractivity() {
     if (imageContainer) {
         const images = document.querySelectorAll('.hero-image');
         const progressBars = document.querySelectorAll('.progress-bar');
-        const prevBtn = document.querySelector('.image-nav.prev');
-        const nextBtn = document.querySelector('.image-nav.next');
         const imageTitle = document.querySelector('#image-title');
         let currentIndex = 0;
         const intervalTime = 7000;
@@ -154,19 +152,6 @@ export function initInteractivity() {
             updateImage(0);
             let imageInterval = setInterval(nextImage, intervalTime);
 
-            // Prev/Next button clicks
-            nextBtn.addEventListener('click', () => {
-                clearInterval(imageInterval);
-                nextImage();
-                imageInterval = setInterval(nextImage, intervalTime);
-            });
-
-            prevBtn.addEventListener('click', () => {
-                clearInterval(imageInterval);
-                prevImage();
-                imageInterval = setInterval(nextImage, intervalTime);
-            });
-
             // Progress bar clicks
             progressBars.forEach(bar => {
                 bar.addEventListener('click', () => {
@@ -197,40 +182,45 @@ export function initInteractivity() {
             imageContainer.addEventListener('mousedown', (e) => {
                 isDragging = true;
                 startX = e.clientX;
-                imageContainer.style.cursor = 'grabbing'; // Visual feedback
+
             });
 
             imageContainer.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
                 const deltaX = e.clientX - startX;
-                if (Math.abs(deltaX) > 50) { // Threshold for swipe
+                if (Math.abs(deltaX) > 50) {
                     clearInterval(imageInterval);
                     if (deltaX > 0) {
                         prevImage();
                     } else {
                         nextImage();
                     }
-                    isDragging = false; // Reset after swipe
+                    isDragging = false;
                     imageInterval = setInterval(nextImage, intervalTime);
                 }
             });
 
             imageContainer.addEventListener('mouseup', () => {
                 isDragging = false;
-                imageContainer.style.cursor = 'grab'; // Reset cursor
+
             });
 
             imageContainer.addEventListener('mouseleave', () => {
                 isDragging = false;
-                imageContainer.style.cursor = 'grab';
+
             });
 
             // Touch swipe support for mobile
+
+            let hasSwiped = false; // New flag to prevent multiple swipes
+
             imageContainer.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
+                hasSwiped = false; // Reset flag at the start of each touch
             });
 
             imageContainer.addEventListener('touchmove', (e) => {
+                if (hasSwiped) return; // Exit if swipe already processed
                 const deltaX = e.touches[0].clientX - startX;
                 if (Math.abs(deltaX) > 50) { // Threshold for swipe
                     clearInterval(imageInterval);
@@ -239,16 +229,16 @@ export function initInteractivity() {
                     } else {
                         nextImage();
                     }
+                    hasSwiped = true; // Mark swipe as processed
                     imageInterval = setInterval(nextImage, intervalTime);
                 }
             });
 
             imageContainer.addEventListener('touchend', () => {
-                // No action needed, swipe handled in touchmove
+                hasSwiped = false; // Reset flag when touch ends
             });
         });
     }
-
     // Project tabs logic for filtering projects
     const projectTabs = document.querySelector('.project-tabs');
     if (projectTabs) {

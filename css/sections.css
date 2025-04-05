@@ -108,39 +108,7 @@ h2 {
     z-index: 10;
 }
 
-.image-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    color: rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.image-nav.prev {
-    left: 2rem;
-}
-
-.image-nav.next {
-    right: 2rem;
-}
-
-.image-nav:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.image-nav svg {
-    width: 24px;
-    height: 24px;
-}
 
 /* Progress Bars */
 .progress-bars {
