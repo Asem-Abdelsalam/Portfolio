@@ -84,7 +84,7 @@ export function initInteractivity() {
     const imageContainer = document.querySelector('.image-container');
     if (imageContainer) {
         const images = document.querySelectorAll('.hero-image');
-        const dots = document.querySelectorAll('.dot');
+        const progressBars = document.querySelectorAll('.progress-bar');
         const prevBtn = document.querySelector('.image-nav.prev');
         const nextBtn = document.querySelector('.image-nav.next');
         const imageTitle = document.querySelector('#image-title');
@@ -103,31 +103,35 @@ export function initInteractivity() {
             "furniture-design"
         ];
 
-        // Updates the active image and dot in the slider
+        // Updates the active image and progress bar in the slider
         function updateImage(index) {
             images.forEach((image, i) => {
                 image.classList.toggle('active', i === index);
                 if (i === index) {
                     image.style.animation = 'none';
-                    image.offsetHeight;
-                    image.style.animation = 'zoomIn 7s linear forwards';
-                }
-            });
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-                const dotCircle = dot.querySelector('.dot-circle');
-                const loadingCircle = dot.querySelector('.loading-circle');
-                if (i === index) {
-                    dotCircle.style.opacity = '1';
-                    loadingCircle.style.animation = 'none';
-                    loadingCircle.offsetHeight;
-                    loadingCircle.style.animation = 'drawCircle 7s linear forwards';
+                    image.offsetHeight; // Trigger reflow
+                    image.style.animation = 'zoomIn 7s ease-in-out forwards';
                 } else {
-                    dotCircle.style.opacity = '0.3';
-                    loadingCircle.style.animation = 'none';
-                    loadingCircle.setAttribute('stroke-dashoffset', '50.27');
+                    image.style.animation = 'none';
                 }
             });
+
+            progressBars.forEach((bar, i) => {
+                bar.classList.toggle('active', i === index);
+                const fill = bar.querySelector('.progress-fill');
+                if (i === index) {
+                    fill.style.animation = 'none';
+                    fill.style.width = '0';
+                    fill.offsetHeight; // Trigger reflow
+                    setTimeout(() => {
+                        fill.style.animation = 'fillBar 7s ease-in-out forwards';
+                    }, 10);
+                } else {
+                    fill.style.animation = 'none';
+                    fill.style.width = '0';
+                }
+            });
+
             imageTitle.textContent = titles[index];
             imageTitle.href = `projects.html?category=${categories[index]}`;
             currentIndex = index;
@@ -150,6 +154,7 @@ export function initInteractivity() {
             updateImage(0);
             let imageInterval = setInterval(nextImage, intervalTime);
 
+            // Prev/Next button clicks
             nextBtn.addEventListener('click', () => {
                 clearInterval(imageInterval);
                 nextImage();
@@ -162,13 +167,84 @@ export function initInteractivity() {
                 imageInterval = setInterval(nextImage, intervalTime);
             });
 
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
+            // Progress bar clicks
+            progressBars.forEach(bar => {
+                bar.addEventListener('click', () => {
                     clearInterval(imageInterval);
-                    const index = parseInt(dot.getAttribute('data-service'));
+                    const index = parseInt(bar.getAttribute('data-service'));
                     updateImage(index);
                     imageInterval = setInterval(nextImage, intervalTime);
                 });
+            });
+
+            // Keyboard arrow key support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    clearInterval(imageInterval);
+                    nextImage();
+                    imageInterval = setInterval(nextImage, intervalTime);
+                } else if (e.key === 'ArrowLeft') {
+                    clearInterval(imageInterval);
+                    prevImage();
+                    imageInterval = setInterval(nextImage, intervalTime);
+                }
+            });
+
+            // Mouse swipe support
+            let isDragging = false;
+            let startX = 0;
+
+            imageContainer.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                imageContainer.style.cursor = 'grabbing'; // Visual feedback
+            });
+
+            imageContainer.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - startX;
+                if (Math.abs(deltaX) > 50) { // Threshold for swipe
+                    clearInterval(imageInterval);
+                    if (deltaX > 0) {
+                        prevImage();
+                    } else {
+                        nextImage();
+                    }
+                    isDragging = false; // Reset after swipe
+                    imageInterval = setInterval(nextImage, intervalTime);
+                }
+            });
+
+            imageContainer.addEventListener('mouseup', () => {
+                isDragging = false;
+                imageContainer.style.cursor = 'grab'; // Reset cursor
+            });
+
+            imageContainer.addEventListener('mouseleave', () => {
+                isDragging = false;
+                imageContainer.style.cursor = 'grab';
+            });
+
+            // Touch swipe support for mobile
+            imageContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            imageContainer.addEventListener('touchmove', (e) => {
+                const deltaX = e.touches[0].clientX - startX;
+                if (Math.abs(deltaX) > 50) { // Threshold for swipe
+                    clearInterval(imageInterval);
+                    if (deltaX > 0) {
+                        prevImage();
+                    } else {
+                        nextImage();
+                    }
+                    imageInterval = setInterval(nextImage, intervalTime);
+                }
+            });
+
+            imageContainer.addEventListener('touchend', () => {
+                // No action needed, swipe handled in touchmove
             });
         });
     }

@@ -141,40 +141,51 @@ h2 {
     height: 24px;
 }
 
-/* Progress Dots */
-.image-dots {
+/* Progress Bars */
+.progress-bars {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
+    justify-content: center;
 }
 
-.dot {
+.progress-bar {
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
     cursor: pointer;
+    position: relative;
 }
 
-.dot-circle {
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
+.progress-fill {
+    width: 0;
+    height: 100%;
+    background: #fff;
+    transition: width 0.2s ease-in-out; /* Smooth transition for manual resets */
 }
 
-.dot.active .dot-circle {
-    opacity: 1;
+.progress-bar.active .progress-fill {
+    width: 100%;
+    animation: fillBar 7s ease-in-out forwards; /* Changed to ease-in-out */
 }
-
-.dot .loading-circle {
-    opacity: 0;
-    stroke-dasharray: 50.27;
-    stroke-dashoffset: 50.27;
-}
-
-.dot.active .loading-circle {
-    opacity: 1;
-    animation: drawCircle 7s linear forwards;
-}
-
-@keyframes drawCircle {
-    to {
-        stroke-dashoffset: 0;
+@keyframes fillBar {
+    from {
+        width: 0;
     }
+    to {
+        width: 100%;
+    }
+}
+/* Adjust .image-controls positioning if needed */
+.image-controls {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 10;
 }
 /* #endregion */
 
