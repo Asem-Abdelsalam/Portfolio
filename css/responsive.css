@@ -86,7 +86,7 @@
 }
 @media (max-width: 768px) {
     .hero {
-        height: calc(100vh - 3rem); /* Slightly more padding for mobile header */
+        height: calc(100vh - 5rem); /* Slightly more padding for mobile header */
         max-height: 100vh; /* Hard cap to prevent overflow */
     }
 
