@@ -12,6 +12,7 @@
 /******************************************************************************
  * 1. SHARED STYLES 
  ******************************************************************************/
+/* Common Section & Heading */
 .section {
     padding: 8rem 0;
 }
@@ -29,6 +30,7 @@ h2 {
 /******************************************************************************
  * 2. INDEX PAGE STYLES (index.html)
  ******************************************************************************/
+/* Hero Section & Image Carousel */
 .hero {
     position: relative;
     height: 100vh;
@@ -36,6 +38,7 @@ h2 {
     overflow: hidden;
 }
 
+/* Hero Elements */
 .image-container {
     position: relative;
     width: 100%;
@@ -53,12 +56,12 @@ h2 {
     top: 0;
     left: 0;
     transition: opacity 0.5s ease;
-    transform: scale(1); /* Initial scale */
+    transform: scale(1);
 }
 
 .hero-image.active {
     opacity: 1;
-    animation: zoomIn 7s linear forwards; /* Zoom animation */
+    animation: zoomIn 7s linear forwards;
 }
 
 @keyframes zoomIn {
@@ -66,7 +69,7 @@ h2 {
         transform: scale(1);
     }
     to {
-        transform: scale(1.2); /* Zooms to 120% size */
+        transform: scale(1.2);
     }
 }
 
@@ -135,6 +138,7 @@ h2 {
     height: 24px;
 }
 
+/* Progress Dots */
 .image-dots {
     display: flex;
     gap: 0.5rem;
@@ -173,6 +177,7 @@ h2 {
 /******************************************************************************
  * 3. ABOUT PAGE STYLES (about.html)
  ******************************************************************************/
+/* Profile Section */
 .about-section {
     background: #fff;
     padding: 8rem 0;
@@ -220,6 +225,7 @@ h2 {
     line-height: 1.8;
 }
 
+/* Work Experience */
 .experience-section {
     background: #f5f5f5;
 }
@@ -269,6 +275,7 @@ h2 {
     line-height: 1.6;
 }
 
+/* Technical Skills */
 .skills-section {
     background: #fff;
 }
@@ -297,6 +304,7 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Academic Background */
 .education-section {
     background: #f5f5f5;
 }
@@ -346,6 +354,7 @@ h2 {
     line-height: 1.6;
 }
 
+/* Language Proficiency */
 .languages-section {
     background: #fff;
 }
@@ -377,6 +386,7 @@ h2 {
 /******************************************************************************
  * 4. PROJECTS PAGE STYLES (projects.html)
  ******************************************************************************/
+/* Portfolio Grid & Filters */
 .project-section {
     background: #fff;
 }
@@ -434,7 +444,7 @@ h2 {
     color: #2e5e56;
 }
 
-/* Project Tabs */
+/* Project Filter Tabs */
 .project-tabs {
     display: flex;
     justify-content: center;
@@ -463,6 +473,7 @@ h2 {
 /******************************************************************************
  * 5. PROJECT DETAIL PAGE STYLES (project-detail.html)
  ******************************************************************************/
+/* Project Overview */
 .project-detail-section {
     background: #fff;
     padding: 8rem 0;
@@ -500,10 +511,10 @@ h2 {
     background: #2e5e56;
 }
 
-/* Image Slider */
+/* Before/After Comparison */
 .image-slider {
     position: relative;
-    max-width: 1200px; /* Increased from 800px */
+    max-width: 1200px;
     margin: 0 auto 3rem;
     overflow: hidden;
     border: 1px solid #ddd;
@@ -512,7 +523,7 @@ h2 {
 .slider-container {
     position: relative;
     width: 100%;
-    height: 600px; /* Increased from 400px */
+    height: 600px;
     background: #f5f5f5;
 }
 
@@ -523,10 +534,10 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    user-select: none; /* Prevent selection */
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE/Edge */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .slider-image.input {
@@ -548,7 +559,7 @@ h2 {
     cursor: ew-resize;
     z-index: 2;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    user-select: none; /* Prevent selection */
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -575,7 +586,7 @@ h2 {
     color: #555;
 }
 
-/* 3D Viewers */
+/* 3D Model Display */
 .model-viewers {
     display: flex;
     justify-content: space-between;
@@ -589,8 +600,8 @@ h2 {
     text-align: center;
     position: relative;
     width: 100%;
-    height: 500px; /* Default height for the viewer */
-    transition: height 0.3s ease; /* Smooth height adjustment */
+    height: 500px;
+    transition: height 0.3s ease;
 }
 
 .viewer-container h4 {
@@ -604,7 +615,7 @@ h2 {
     height: 100%;
     background: #707070;
     border: 1px solid #ddd;
-    transition: width 0.3s ease, height 0.3s ease; /* Smooth resizing */
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .viewer-modal {
@@ -617,7 +628,7 @@ h2 {
     z-index: 1000;
     border: 1px solid #ddd;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transition: width 0.3s ease, height 0.3s ease; /* Smooth resizing */
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .viewer-modal canvas {
@@ -626,31 +637,31 @@ h2 {
     border: none;
 }
 
-/* Extend Button */
+/* Viewer Controls */
 .extend-btn {
     position: absolute;
     bottom: 10px;
     right: 10px;
     padding: 6px;
-    background: none; /* Removed background color */
+    background: none;
     border: none;
     cursor: pointer;
     transition: opacity 0.3s;
 }
 
 .extend-btn:hover {
-    opacity: 0.7; /* Subtle hover effect without background */
+    opacity: 0.7;
 }
 
 .extend-btn svg {
     display: block;
     width: 24px;
     height: 24px;
-    stroke: #ffffff; /* Ensure stroke is white */
-    fill: none; /* Ensure no fill for the window-like icons */
+    stroke: #ffffff;
+    fill: none;
 }
 
-/* Modal Overlay */
+/* Modal Views */
 .viewer-modal {
     position: fixed;
     top: 10%;
@@ -661,7 +672,7 @@ h2 {
     z-index: 1000;
     border: 1px solid #ddd;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transition: width 0.3s ease, height 0.3s ease; /* Smooth resizing */
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .viewer-modal canvas {
@@ -690,6 +701,7 @@ h2 {
 /******************************************************************************
  * 6. CONTACT PAGE STYLES (contact.html)
  ******************************************************************************/
+/* Contact Form & Elements */
 .contact-section {
     background: #fff;
     min-height: 100vh;
@@ -770,6 +782,7 @@ h2 {
     background: #2e5e56;
 }
 
+/* Form Feedback */
 .form-feedback {
     text-align: center;
     margin-top: 1.5rem;
