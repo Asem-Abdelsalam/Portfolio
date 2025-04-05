@@ -86,7 +86,7 @@
 }
 @media (max-width: 768px) {
     .hero {
-        height: calc(100vh - 5rem); /* Slightly more padding for mobile header */
+        height: calc(100vh - 3.5rem); /* Slightly more padding for mobile header */
         max-height: 100vh; /* Hard cap to prevent overflow */
     }
 
@@ -95,8 +95,17 @@
     }
 
     .hero-image {
-        object-fit: cover; /* Already present, just confirming */
-        max-height: 100%; /* Ensure images don’t exceed container */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-height: 100%;
+        filter: brightness(1);
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s ease;
+        transform: scale(1);
     }
 
     .image-title {
