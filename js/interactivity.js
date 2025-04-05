@@ -222,8 +222,8 @@ export function initInteractivity() {
                 outputImage: 'images/projects/Automation/productdetails/after.png',
                 overview: 'Creating a complete product detail with schedule by inputting one or more detail models.',
                 logic: 'This script automates the generation of detailed drawings and schedules by parsing input models, extracting key parameters, and organizing them into a structured output using Grasshopper and Rhino APIs.',
-                inputModel: 'models/automation1-before.glb',
-                outputModel: 'models/automation1-after.glb'
+                inputModel: 'models\model.glb',
+                outputModel: 'models\model.glb'
             },
             'automation2': {
                 title: '2D Product Cutfiles to 3D Models',
@@ -464,7 +464,9 @@ export function initInteractivity() {
 
                             button.innerHTML = `
                                 <svg class="contract-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 4h-6v6M4 20h6v-6M14 14l6-6M10 10l-6 6"/>
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                                    <line x1="15" y1="3" x2="15" y2="21"></line>
                                 </svg>
                             `;
                             button.setAttribute('aria-label', 'Contract Viewer');
@@ -491,7 +493,9 @@ export function initInteractivity() {
 
                         button.innerHTML = `
                             <svg class="expand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h6v6M14 20h6v-6M10 10l-6-6M20 14l-6 6"/>
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="3" y1="15" x2="21" y2="15"></line>
                             </svg>
                         `;
                         button.setAttribute('aria-label', 'Expand Viewer');

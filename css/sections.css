@@ -757,6 +757,7 @@ h2 {
     width: 24px;
     height: 24px;
     stroke: #ffffff; /* Ensure stroke is white */
+    fill: none; /* Ensure no fill for the window-like icons */
 }
 
 /* Modal Overlay */

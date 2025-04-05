@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata and external resources -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Asem Abdelsalam</title>
@@ -9,14 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header section with navigation -->
     <header class="header">
         <div class="container">
+            <!-- Logo linking to the homepage -->
             <a href="index.html" class="logo" aria-label="Home">Asem Abdelsalam</a>
             <nav class="nav-menu" aria-label="Main navigation">
                 <ul class="nav-list">
+                    <!-- Navigation links -->
                     <li><a href="about.html">About</a></li>
                     <li><a href="projects.html">Projects</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <!-- Search toggle button -->
                     <li class="search-toggle" aria-label="Toggle search">
                         <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -24,6 +29,7 @@
                         </svg>
                     </li>
                 </ul>
+                <!-- Hamburger menu for mobile view -->
                 <button class="hamburger" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
@@ -33,9 +39,12 @@
         </div>
     </header>
 
+    <!-- Search bar section -->
     <div id="search-bar" class="search-bar" role="search">
         <div class="container">
+            <!-- Search input field -->
             <input type="search" placeholder="Search projects..." id="search-input" aria-label="Search projects">
+            <!-- Close search button -->
             <button class="close-search" aria-label="Close search">
                 <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -45,18 +54,22 @@
         </div>
     </div>
 
+    <!-- Main content section -->
     <main>
         <section id="projects" class="section project-section">
             <div class="container">
+                <!-- Section title -->
                 <h2>Projects</h2>
+                <!-- Tabs for filtering projects -->
                 <div class="project-tabs">
                     <button class="tab-button active" data-tab="automation">Automation</button>
                     <button class="tab-button" data-tab="fabrication">Fabrication</button>
                     <button class="tab-button" data-tab="parametric-modeling">Parametric Modeling</button>
                     <button class="tab-button" data-tab="furniture-design">Furniture Design</button>
                 </div>
+                <!-- Project grid displaying projects -->
                 <div class="project-grid" id="project-grid">
-                    <!-- Automation -->
+                    <!-- Automation projects -->
                     <div class="project-item" data-category="automation">
                         <img src="images/automation-project1.jpg" alt="Product Detail Drawings Automation" class="project-img" loading="lazy">
                         <div class="project-text">
@@ -89,7 +102,7 @@
                             <a href="project-detail.html?id=automation4" class="project-link">View Project</a>
                         </div>
                     </div>
-                    <!-- Fabrication -->
+                    <!-- Fabrication projects -->
                     <div class="project-item" data-category="fabrication">
                         <img src="images/fabrication-project1.jpg" alt="Fabrication Project 1" class="project-img" loading="lazy">
                         <div class="project-text">
@@ -98,7 +111,7 @@
                             <a href="project-detail.html?id=fabrication1" class="project-link">View Project</a>
                         </div>
                     </div>
-                    <!-- Parametric Modeling -->
+                    <!-- Parametric Modeling projects -->
                     <div class="project-item" data-category="parametric-modeling">
                         <img src="images/parametric-project1.jpg" alt="Parametric Modeling Project 1" class="project-img" loading="lazy">
                         <div class="project-text">
@@ -107,7 +120,7 @@
                             <a href="project-detail.html?id=parametric1" class="project-link">View Project</a>
                         </div>
                     </div>
-                    <!-- Furniture Design -->
+                    <!-- Furniture Design projects -->
                     <div class="project-item" data-category="furniture-design">
                         <img src="images/furniture-project1.jpg" alt="Furniture Design Project 1" class="project-img" loading="lazy">
                         <div class="project-text">
@@ -121,13 +134,16 @@
         </section>
     </main>
 
+    <!-- Footer section -->
     <footer class="footer">
         <div class="container">
+            <!-- Footer navigation links -->
             <nav class="footer-nav">
                 <a href="about.html">About</a>
                 <a href="projects.html">Projects</a>
                 <a href="contact.html">Contact</a>
             </nav>
+            <!-- Social media links -->
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/asem-abdelsalam/" target="_blank" aria-label="LinkedIn">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -145,6 +161,7 @@
                     </svg>
                 </a>
             </div>
+            <!-- Back to top link -->
             <a href="#" class="back-to-top">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="18 15 12 9 6 15"></polyline>
@@ -155,6 +172,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript file -->
     <script src="js/script.js" type="module"></script>
 </body>
 </html>
